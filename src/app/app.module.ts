@@ -12,13 +12,15 @@ import { appRouting } from './app.routes';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeMapComponent } from './home-map/home-map.component';
+import { CityComponent } from './city/city.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    HomeMapComponent
+    HomeMapComponent,
+    CityComponent
   ],
   imports: [
     BrowserModule,
