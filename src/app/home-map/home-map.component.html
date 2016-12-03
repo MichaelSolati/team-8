@@ -1,3 +1,10 @@
-<sebm-google-map [latitude]="lat" [longitude]="lng">
-  <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+<sebm-google-map [latitude]="center[0]" [longitude]="center[1]" (window:resize)="onResize($event)">
+  <span *ngFor="let city of cities">
+  <sebm-google-map-marker [latitude]="city.lat" [longitude]="city.lng">
+    <sebm-google-map-info-window [disableAutoPan]="true">
+      Welcome to the city of {{city.city}} with a population of... {{city.population}}
+    </sebm-google-map-info-window>
+  </sebm-google-map-marker>
+
+  </span>
 </sebm-google-map>
