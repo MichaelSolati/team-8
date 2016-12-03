@@ -12,6 +12,16 @@
         [zoom]="13">
         <sebm-google-map-marker [latitude]="city.jurisdictiongeo.coordinates[1]" [longitude]="city.jurisdictiongeo.coordinates[0]"></sebm-google-map-marker>
       </sebm-google-map>
+              <div class="text-center">
+           <h4>Population: {{city.population}}</h4>
+           <h5>Safety Rank: {{city.rank}}</h5>
+          <br />
+          <div class="progress">
+            <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="0"
+            aria-valuemin="0" aria-valuemax="100" [style.width]="city.rankNorm+'%'" [style.background-color]="getColor(city.rankNorm)">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

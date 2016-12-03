@@ -60,6 +60,26 @@ export class CityComponent implements OnInit {
     return this.http.get(environment.apiUrl + "cities/" + this.cityId).map(this.extractData).catch(this.handleError);
   }
 
+  private getColor(rank) {
+    var score = rank;
+
+    if (score >= 0 && score <= 20) {
+      return "red";
+    }
+    else if (score >= 21 && score <= 40) {
+      return "orange";
+    }
+    else if (score >= 41 && score <= 60) {
+      return "yellow";
+    }
+    else if (score >= 61 && score <= 80) {
+      return "green";
+    }
+    else {
+      return "lime";
+    }
+  }
+
   private getDetails(): Observable<any[]> {
     return this.http.get(environment.apiUrl + "details/" + encodeURI(this.city.jurisdictiongeo_city + ", Connecticut")).map(this.extractData).catch(this.handleError);
   }
