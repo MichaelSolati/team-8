@@ -6,11 +6,9 @@
           Welcome to the city of {{city.jurisdictiongeo_city}} with a population of... {{city.population}} people.
           <hr />
           Rank:
-
           <div class="progress">
-            <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow={{getWidth(city)}}
-            aria-valuemin="0" aria-valuemax="100" style="width:70%; background-color: {{getColor(city)}}">
-            <span class="sr-only">70% Complete</span>
+            <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="0"
+            aria-valuemin="0" aria-valuemax="100" style="width:{{getRank(city.rankNorm)}}%;">
           </div>
         </div>
       </div>

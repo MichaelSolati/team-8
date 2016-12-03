@@ -46,36 +46,31 @@ export class HomeMapComponent implements OnInit {
     return (safetyscore - globalmin) / (globalmax - globalmin);
   }
 
-  private getColor(city) {
-    console.log(city);
-    var score = city.score;
+  private getColor(rank) {
+    var score = rank;
 
-    if (score <= 0 && score >= 0.2) {
+    if (score <= 0 && score >= 20) {
       return "red";
     }
-    else if (score <= 0.2 && score >= 0.4) {
+    else if (score <= 21 && score >= 40) {
       return "orange";
     }
-    else if (score <= 0.4 && score >= 0.6) {
+    else if (score <= 41 && score >= 60) {
       return "yellow";
     }
-    else if (score <= 0.6 && score >= 0.8) {
+    else if (score <= 61 && score >= 80) {
       return "green";
     }
     else {
-      return "Chartreuse";
+      return "lime";
     }
-  }
-
-  private getWidth(city) {
-    console.log(city)
-    var score = city.score;
-
-    return Math.round(score * 100);
-
   }
 
   private onResize(event) {
     //console.log(event.target.innerWidth);
+  }
+
+  private getRank(rankNorm){
+  return Number(rankNorm);
   }
 }
