@@ -18,6 +18,7 @@ export class CityComponent implements OnInit {
   private city: any = null;
   private cityId: string = "";
   private citySub: Subscription;
+  private details: any = null;
 
   constructor(private route: ActivatedRoute, private http: Http) { }
 
@@ -25,8 +26,16 @@ export class CityComponent implements OnInit {
     this.citySub = this.route.params.subscribe((params) => {
       this.cityId = params.cityId;
       this.getCity().subscribe((city) => {
-        this.city = city[0];
-        console.log(this.city);
+        this.city = city.results[0];
+        this.getDetails().subscribe((details) => {
+          let details = JSON.parse(details).query.pages;
+          for (let prop in details) {
+            this.details = details[prop];
+            console.log(this.details)
+          }
+        }, (error) => {
+          console.log(error);
+        });
       }, (error) => {
         console.log(error);
       });
@@ -40,7 +49,7 @@ export class CityComponent implements OnInit {
   private extractData(res: Response) {
     let body = res.json();
     if (body.error) { throw body.error };
-    return body.results || {};
+    return body || {};
   }
 
   private handleError(error: Response | any) {
@@ -49,6 +58,10 @@ export class CityComponent implements OnInit {
 
   private getCity(): Observable<any[]> {
     return this.http.get(environment.apiUrl + "cities/" + this.cityId).map(this.extractData).catch(this.handleError);
+  }
+
+  private getDetails(): Observable<any[]> {
+    return this.http.get(environment.apiUrl + "details/" + encodeURI(this.city.jurisdictiongeo_city + ", Connecticut")).map(this.extractData).catch(this.handleError);
   }
 
 }
