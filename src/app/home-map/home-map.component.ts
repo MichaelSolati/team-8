@@ -20,7 +20,6 @@ export class HomeMapComponent implements OnInit {
 
   ngOnInit() {
     this.getCities().subscribe((cities) => {
-      console.log(cities)
       this.cities = cities;
     }, (error) => {
       console.log(error);
@@ -41,13 +40,8 @@ export class HomeMapComponent implements OnInit {
     return this.http.get(environment.apiUrl+"cities").map(this.extractData).catch(this.handleError);
   }
 
-  private goToCity(city: string) {
-    let cityURL: string = encodeURI(city + ", Connecticut");
-    this.router.navigate(["/", "city", cityURL]);
-  }
-
   private onResize(event) {
-    console.log(event.target.innerWidth);
+    //console.log(event.target.innerWidth);
   }
 
 }

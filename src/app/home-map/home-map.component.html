@@ -4,7 +4,7 @@
     <sebm-google-map-info-window [disableAutoPan]="true">
       Welcome to the city of {{city.jurisdictiongeo_city}} with a population of... {{city.population}}
       <br>
-      <button type="button" class="btn btn-info" (click)="goToCity(city.jurisdictiongeo_city)">View City</button>
+      <button type="button" class="btn btn-info" [routerLink]="['/city',city._id]">View City</button>
     </sebm-google-map-info-window>
   </sebm-google-map-marker>
 
