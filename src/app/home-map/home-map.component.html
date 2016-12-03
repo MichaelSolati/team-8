@@ -4,16 +4,16 @@
       <sebm-google-map-info-window [disableAutoPan]="true">
         <div class="cityInfo text-center">
           <h3>{{city.jurisdictiongeo_city}}</h3>
-           <h4>Population: {{city.population}}</h4>
-           <h5>Safety Rank: {{city.rank}}</h5>
+          <h4>Population: {{city.population}}</h4>
+          <h5>Safety Rank: {{city.rank}}</h5>
           <br />
           <div class="progress">
             <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="0"
             aria-valuemin="0" aria-valuemax="100" [style.width]="city.rankNorm+'%'" [style.background-color]="getColor(city.rankNorm)">
           </div>
         </div>
-      <br>
-      <button type="button" class="btn btn-info" [routerLink]="['/city',city._id]">View City</button>
+        <br>
+        <button type="button" class="btn btn-info" [routerLink]="['/city',city._id]">View City</button>
       </div>
     </sebm-google-map-info-window>
   </sebm-google-map-marker>

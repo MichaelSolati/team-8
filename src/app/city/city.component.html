@@ -1,29 +1,29 @@
 <div class="container" *ngIf="city">
   <div class="row text-center">
     <h1 class="text-center">{{city.jurisdictiongeo_city}}</h1>
-    <a *ngIf="details" href="https://en.wikipedia.org/?curid={{details.pageid}}" target="_blank">View On Wikipedia</a>
+    <a *ngIf="city.wikipedia.link" href="{{city.wikipedia.link}}" target="_blank">View On Wikipedia</a>
   </div>
   <div class="row">
     <div class="col-xs-12 col-sm-6">
-      <p *ngIf="details" [innerHTML]="details.extract"></p>
+      <p *ngIf="city.wikipedia.summary" [innerHTML]="city.wikipedia.summary"></p>
     </div>
     <div class="col-xs-12 col-sm-6">
       <sebm-google-map *ngIf="city.jurisdictiongeo" [latitude]="city.jurisdictiongeo.coordinates[1]" [longitude]="city.jurisdictiongeo.coordinates[0]"
-        [zoom]="13">
-        <sebm-google-map-marker [latitude]="city.jurisdictiongeo.coordinates[1]" [longitude]="city.jurisdictiongeo.coordinates[0]"></sebm-google-map-marker>
-      </sebm-google-map>
-              <div class="text-center">
-           <h4>Population: {{city.population}}</h4>
-           <h5>Safety Rank: {{city.rank}}</h5>
-          <br />
-          <div class="progress">
-            <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="0"
-            aria-valuemin="0" aria-valuemax="100" [style.width]="city.rankNorm+'%'" [style.background-color]="getColor(city.rankNorm)">
-          </div>
-        </div>
+      [zoom]="13">
+      <sebm-google-map-marker [latitude]="city.jurisdictiongeo.coordinates[1]" [longitude]="city.jurisdictiongeo.coordinates[0]"></sebm-google-map-marker>
+    </sebm-google-map>
+    <div class="text-center">
+      <h4>Population: {{city.population}}</h4>
+      <h5>Safety Rank: {{city.rank}}</h5>
+      <br />
+      <div class="progress">
+        <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="0"
+        aria-valuemin="0" aria-valuemax="100" [style.width]="city.rankNorm+'%'" [style.background-color]="getColor(city.rankNorm)">
       </div>
     </div>
   </div>
+</div>
+</div>
 </div>
 
 <div class="container" *ngIf="!city">

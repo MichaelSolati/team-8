@@ -11,30 +11,101 @@ router.get('/', function (req, res) {
   res.sendFile(appRoot + '/public/index.html');
 });
 
+router.route("/city/:city").get(function (req, res) {
+  let city = req.params.city;
+
+  MongoDB.get("cities").find({ "jurisdictiongeo_city": city }, function (err, rows) {
+    let city = rows[0].jurisdictiongeo_city+", Connecticut";
+    let result = {};
+
+    let request = require("request");
+
+    var options = {
+      method: 'GET',
+      url: 'https://en.wikipedia.org/w/api.php',
+      qs:
+      {
+        action: 'query',
+        prop: 'extracts',
+        format: 'json',
+        titles: city
+      },
+      headers:
+      {
+        'postman-token': '48001125-ff89-21e4-aa63-b7eb3b952bb1',
+        'cache-control': 'no-cache'
+      }
+    };
+
+    request(options, function (error, response, wikipediaResponse) {
+      if (error) throw new Error(error);
+
+      let details = JSON.parse(wikipediaResponse).query.pages;
+      for (let prop in details) {
+        rows[0].wikipedia = {
+          summary: (details[prop].extract),
+          link: "https://en.wikipedia.org/?curid="+details[prop].pageid
+        }
+      }
+
+      if (err !== null) {
+        result.error = err;
+      }
+      else {
+        result.results = rows[0];
+      }
+      res.setHeader('content-type', 'text/json');
+      res.send(json_encode(result));
+    });
+  });
+});
+
 router.route("/cities/:_id").get(function (req, res) {
   let _id = req.params._id;
-  let start = req.query.start;
-  let count = req.query.count;
-  if (start === undefined) {
-    start = 0;
-  } else {
-    start = parseInt(start);
-  }
-  if (count === undefined) {
-    count = 200;
-  } else {
-    count = parseInt(count);
-  }
-  MongoDB.get("cities").find({ "_id": _id }, { limit: count, skip: start }, function (err, rows) {
+
+  MongoDB.get("cities").find({ "_id": _id }, function (err, rows) {
+    let city = rows[0].jurisdictiongeo_city+", Connecticut";
     let result = {};
-    if (err !== null) {
-      result.error = err;
-    }
-    else {
-      result.results = rows;
-    }
-    res.setHeader('content-type', 'text/json');
-    res.send(json_encode(result));
+
+    let request = require("request");
+
+    var options = {
+      method: 'GET',
+      url: 'https://en.wikipedia.org/w/api.php',
+      qs:
+      {
+        action: 'query',
+        prop: 'extracts',
+        format: 'json',
+        titles: city
+      },
+      headers:
+      {
+        'postman-token': '48001125-ff89-21e4-aa63-b7eb3b952bb1',
+        'cache-control': 'no-cache'
+      }
+    };
+
+    request(options, function (error, response, wikipediaResponse) {
+      if (error) throw new Error(error);
+
+      let details = JSON.parse(wikipediaResponse).query.pages;
+      for (let prop in details) {
+        rows[0].wikipedia = {
+          summary: (details[prop].extract),
+          link: "https://en.wikipedia.org/?curid="+details[prop].pageid
+        }
+      }
+
+      if (err !== null) {
+        result.error = err;
+      }
+      else {
+        result.results = rows[0];
+      }
+      res.setHeader('content-type', 'text/json');
+      res.send(json_encode(result));
+    });
   });
 });
 
