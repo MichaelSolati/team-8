@@ -6,5 +6,6 @@
 export const environment = {
   production: false,
   google: "AIzaSyDiv-EwAt2W9VZA1BJiDcVEhE4vtOYcf8c",
-  apiUrl: "http://localhost:3000/api/"
+  apiUrl: "http://localhost:3000/api/",
+  "marc": "http://marcgajdosik.com/csc/json_offensesX.php?city="
 };

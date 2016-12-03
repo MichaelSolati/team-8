@@ -37,7 +37,13 @@ export class HomeMapComponent implements OnInit {
   }
 
   private getCities(): Observable<any[]> {
-    return this.http.get(environment.apiUrl+"cities").map(this.extractData).catch(this.handleError);
+    return this.http.get(environment.apiUrl + "cities").map(this.extractData).catch(this.handleError);
+  }
+
+  private getScore(safetyscore) {
+    var globalmax = 15442;
+    var globalmin = 1;
+    return (safetyscore - globalmin) / (globalmax - globalmin);
   }
 
   private onResize(event) {

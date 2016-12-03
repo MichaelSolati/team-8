@@ -3,6 +3,7 @@
   <sebm-google-map-marker *ngIf="city.jurisdictiongeo" [latitude]="city.jurisdictiongeo.coordinates[1]" [longitude]="city.jurisdictiongeo.coordinates[0]">
     <sebm-google-map-info-window [disableAutoPan]="true">
       Welcome to the city of {{city.jurisdictiongeo_city}} with a population of... {{city.population}}
+      <p>{{getScore(city.jurisdictiongeo_city)}}</p>
       <br>
       <button type="button" class="btn btn-info" [routerLink]="['/city',city._id]">View City</button>
     </sebm-google-map-info-window>
