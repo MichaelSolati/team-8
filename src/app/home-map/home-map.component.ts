@@ -13,8 +13,36 @@ templateUrl: './home-map.component.html',
 styleUrls: ['./home-map.component.css']
 })
 export class HomeMapComponent implements OnInit {
-private center: number[] = [-72.6506, 41.5623]
-private cities: any[] = [];
+  private center: number[] = [-72.6506, 41.5623]
+  private cities: any[] = [];
+
+  constructor(private http: Http, private router: Router) { }
+
+  ngOnInit() {
+    this.getCities().subscribe((cities) => {
+      this.cities = cities;
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
+  private extractData(res: Response) {
+    let body = res.json();
+    if (body.error) { throw body.error };
+    return body.results || {};
+  }
+
+  private handleError(error: Response | any) {
+    return Observable.throw(error.code);
+  }
+
+  private getCities(): Observable<any[]> {
+    return this.http.get(environment.apiUrl+"cities").map(this.extractData).catch(this.handleError);
+  }
+
+  private onResize(event) {
+    //console.log(event.target.innerWidth);
+  }
 
 constructor(private http: Http, private router: Router) { }
 
