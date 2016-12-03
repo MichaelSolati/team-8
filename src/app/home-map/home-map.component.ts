@@ -50,16 +50,16 @@ export class HomeMapComponent implements OnInit {
   private getColor(rank) {
     var score = rank;
 
-    if (score <= 0 && score >= 20) {
+    if (score >= 0 && score <= 20) {
       return "red";
     }
-    else if (score <= 21 && score >= 40) {
+    else if (score >= 21 && score <= 40) {
       return "orange";
     }
-    else if (score <= 41 && score >= 60) {
+    else if (score >= 41 && score <= 60) {
       return "yellow";
     }
-    else if (score <= 61 && score >= 80) {
+    else if (score >= 61 && score <= 80) {
       return "green";
     }
     else {
