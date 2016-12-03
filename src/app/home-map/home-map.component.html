@@ -1,12 +1,24 @@
 <sebm-google-map [latitude]="center[1]" [longitude]="center[0]" (window:resize)="onResize($event)">
   <span *ngFor="let city of cities">
-  <sebm-google-map-marker *ngIf="city.jurisdictiongeo" [latitude]="city.jurisdictiongeo.coordinates[1]" [longitude]="city.jurisdictiongeo.coordinates[0]">
-    <sebm-google-map-info-window [disableAutoPan]="true">
-      Welcome to the city of {{city.jurisdictiongeo_city}} with a population of... {{city.population}}
+    <sebm-google-map-marker *ngIf="city.jurisdictiongeo" [latitude]="city.jurisdictiongeo.coordinates[1]" [longitude]="city.jurisdictiongeo.coordinates[0]">
+      <sebm-google-map-info-window [disableAutoPan]="true">
+        <div class="cityInfo">
+          Welcome to the city of {{city.jurisdictiongeo_city}} with a population of... {{city.population}} people.
+          <hr />
+          Rank:
+
+          <div class="progress">
+            <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow={{getWidth(city)}}
+            aria-valuemin="0" aria-valuemax="100" style="width:70%">
+            {{getColor(city)}}
+            <span class="sr-only">70% Complete</span>
+          </div>
+        </div>
+      </div>
       <br>
-      <button type="button" class="btn btn-info" (click)="goToCity(city.jurisdictiongeo_city)">View City</button>
+      <button type="button" class="btn btn-info btn-block" (click)="goToCity(city.jurisdictiongeo_city)">View City</button>
     </sebm-google-map-info-window>
   </sebm-google-map-marker>
 
-  </span>
+</span>
 </sebm-google-map>
