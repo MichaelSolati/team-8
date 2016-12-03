@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  google: "AIzaSyDiv-EwAt2W9VZA1BJiDcVEhE4vtOYcf8c"
+  google: "AIzaSyDiv-EwAt2W9VZA1BJiDcVEhE4vtOYcf8c",
+  apiUrl: "http://localhost:3000/api/"
 };

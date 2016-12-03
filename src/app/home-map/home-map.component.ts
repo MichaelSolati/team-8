@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 
+import { environment } from '../../environments/environment';
+
 @Component({
   selector: 'app-home-map',
   templateUrl: './home-map.component.html',
@@ -13,7 +15,6 @@ import 'rxjs/add/operator/catch'
 export class HomeMapComponent implements OnInit {
   private center: number[] = [-72.6506, 41.5623]
   private cities: any[] = [];
-  private dataCTGov: string = "https://data.ct.gov/resource/nmur-6mkp.json";
 
   constructor(private http: Http, private router: Router) { }
 
@@ -29,7 +30,7 @@ export class HomeMapComponent implements OnInit {
   private extractData(res: Response) {
     let body = res.json();
     if (body.error) { throw body.error };
-    return body || {};
+    return body.results || {};
   }
 
   private handleError(error: Response | any) {
@@ -37,7 +38,7 @@ export class HomeMapComponent implements OnInit {
   }
 
   private getCities(): Observable<any[]> {
-    return this.http.get(this.dataCTGov).map(this.extractData).catch(this.handleError);
+    return this.http.get(environment.apiUrl+"cities").map(this.extractData).catch(this.handleError);
   }
 
   private goToCity(city: string) {
