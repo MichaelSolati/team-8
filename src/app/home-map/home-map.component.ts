@@ -21,6 +21,7 @@ export class HomeMapComponent implements OnInit {
   ngOnInit() {
     this.getCities().subscribe((cities) => {
       this.cities = cities;
+      console.log(cities)
     }, (error) => {
       console.log(error);
     });

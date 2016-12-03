@@ -53,7 +53,7 @@ router.get("/cities/", function (req, res) {
     count = parseInt(count);
   }
 
-  MongoDB.get("cities").find({}, { limit: count, skip: start }, function (err, rows) {
+  MongoDB.get("cities").find({}, { limit: count, skip: start, sort: {rankNorm: 1}}, function (err, rows) {
     let result = {};
     if (err !== null) {
       result.error = err;
