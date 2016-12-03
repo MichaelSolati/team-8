@@ -27,11 +27,11 @@ export class CityComponent implements OnInit {
       this.cityId = params.cityId;
       this.getCity().subscribe((city) => {
         this.city = city.results[0];
+        console.log(this.city);
         this.getDetails().subscribe((details) => {
           let details = JSON.parse(details).query.pages;
           for (let prop in details) {
             this.details = details[prop];
-            console.log(this.details)
           }
         }, (error) => {
           console.log(error);
