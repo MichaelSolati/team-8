@@ -9,7 +9,7 @@
           <br />
           <div class="progress">
             <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="0"
-            aria-valuemin="0" aria-valuemax="100" style="width:{{getRank(city.rankNorm)}}%;">
+            aria-valuemin="0" aria-valuemax="100" [style.width]="city.rankNorm+'%'" [style.background-color]="getColor(city.rankNorm)">
           </div>
         </div>
       <br>

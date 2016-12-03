@@ -70,8 +70,4 @@ export class HomeMapComponent implements OnInit {
   private onResize(event) {
     //console.log(event.target.innerWidth);
   }
-
-  private getRank(rankNorm){
-  return Number(rankNorm);
-  }
 }
